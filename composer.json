@@ -10,10 +10,21 @@
     "require": {
         "php": "^7.3|^8.0",
         "fideloper/proxy": "^4.4",
+        "flynsarmy/csv-seeder": "^2.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "joselfonseca/lighthouse-graphql-passport-auth": "^5.1",
         "laravel/framework": "^8.12",
-        "laravel/tinker": "^2.5"
+        "laravel/jetstream": "^1.6",
+        "laravel/sanctum": "^2.6",
+        "laravel/slack-notification-channel": "^2.3",
+        "laravel/socialite": "^5.1",
+        "laravel/tinker": "^2.5",
+        "livewire/livewire": "^2.0",
+        "maatwebsite/excel": "^3.1",
+        "mll-lab/laravel-graphql-playground": "^2.4",
+        "nuwave/lighthouse": "^4.18",
+        "santigarcor/laratrust": "^6.3"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -56,6 +67,10 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "post-install-cmd": [
+            "chmod -R 777 storage",
+            "php artisan passport:keys"
         ]
     }
 }
