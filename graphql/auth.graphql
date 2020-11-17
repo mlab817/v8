@@ -10,7 +10,45 @@ input RefreshTokenInput {
 type User {
     id: ID!
     name: String!
+    nickname: String
     email: String!
+    verified: Boolean!
+    role_id: ID
+    role: Role @belongsTo
+    projects: [Project] @hasMany(type:"paginator") @guard(with:"api")
+    image_url: String
+    contact_number: String
+    position: String
+    operating_unit_id: ID
+    operating_unit: OperatingUnit @belongsTo
+    active: Boolean!
+    notifications: [Notification] @morphMany
+    unreadNotifications: [Notification] @morphMany
+    reviews: [OperatingUnit] @belongsToMany
+    views: [OperatingUnit] @belongsToMany
+    activities: [Activity] @morphMany(type:"paginator")
+    created_at: DateTime
+    reviewed: [Project!]! @hasMany(relation:"reviewed")
+    project_processing_statuses: [ProjectProcessingStatus] @hasMany
+    images: [Image] @hasMany
+    image: Image @belongsTo
+    avatar: String
+    user_avatar: String
+    project_count: Int
+    tokens: [Token]
+    token: Token
+}
+
+type Token {
+    id: String
+    user_id: ID
+    client_id: ID
+    name: String
+    scopes: String
+    revoked: Boolean
+    created_at: String
+    updated_at: String
+    expires_at: String
 }
 
 type AuthPayload {
@@ -96,4 +134,6 @@ extend type Mutation {
     socialLogin(input: SocialLoginInput! @spread): AuthPayload! @field(resolver: "Joselfonseca\\LighthouseGraphQLPassport\\GraphQL\\Mutations\\SocialLogin@resolve")
     verifyEmail(input: VerifyEmailInput! @spread): AuthPayload! @field(resolver: "Joselfonseca\\LighthouseGraphQLPassport\\GraphQL\\Mutations\\VerifyEmail@resolve")
     updatePassword(input: UpdatePassword! @spread): UpdatePasswordResponse! @field(resolver: "Joselfonseca\\LighthouseGraphQLPassport\\GraphQL\\Mutations\\UpdatePassword@resolve") @guard(with: ["api"])
+    revokeToken(token: String!): Token @field(resolver:"RevokeTokenMutation")
+    revokeAllTokens: String @field(resolver:"RevokeAllTokensMutation")
 }

@@ -1,0 +1,3 @@
+extend type Mutation {
+  restoreProject(id: ID!): Project @restore @guard(with: ["api"])
+}

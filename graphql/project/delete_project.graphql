@@ -1,0 +1,13 @@
+extend type Mutation {
+  deleteProject(id: ID!):
+  	Project
+    @delete
+    @can(ability:"delete")
+    @guard(with:["api"])
+
+  forceDeleteProject(id: ID!):
+    Project
+    @forceDelete
+    @can(ability:"forceDelete")
+    @guard(with:["api"])
+}
