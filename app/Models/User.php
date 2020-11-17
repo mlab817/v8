@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasPermissionsTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,11 +13,9 @@ use Joselfonseca\LighthouseGraphQLPassport\MustVerifyEmailGraphQL;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use LaratrustUserTrait;
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
@@ -25,7 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasLoggedInTokens;
     use HasSocialLogin;
     use MustVerifyEmailGraphQL;
-    use LaratrustUserTrait;
+    use HasPermissionsTrait;
 
     /**
      * The attributes that are mass assignable.

@@ -2,37 +2,22 @@
 
 namespace App\Models;
 
-use App\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Role extends Model
 {
-    use SoftDeletes;
-    
-    protected $fillable = [
-      'id',
-      'name',
-      'ident',
-      'description',
-      'active',
-      'level'
-    ];
+    use HasFactory;
 
-    protected $casts = [
-      'active' => 'bool',
-      'level' => 'int'
-    ];
+	public function permissions() {
 
-    public function users(): HasMany
-    {
-      return $this->hasMany(User::class);
-    }
+		return $this->belongsToMany(Permission::class,'roles_permissions');
 
-    public function permissions(): BelongsToMany
-    {
-      return $this->belongsToMany(Permission::class);
-    }
+	}
+
+	public function users() {
+
+		return $this->belongsToMany(User::class,'users_roles');
+
+	}
 }
