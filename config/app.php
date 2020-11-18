@@ -177,7 +177,6 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         \Nuwave\Lighthouse\Subscriptions\SubscriptionServiceProvider::class,
-	    \App\Providers\PermissionsServiceProvider::class,
     ],
 
     /*

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Traits\HasPermissionsTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -24,7 +23,6 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasLoggedInTokens;
     use HasSocialLogin;
     use MustVerifyEmailGraphQL;
-    use HasPermissionsTrait;
 
     /**
      * The attributes that are mass assignable.
